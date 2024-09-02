@@ -1,0 +1,32 @@
+train:
+  device: cuda:2
+  pretrain_model: ./save/fire_window25_np_norm100.pth #./save/backbone_unet.pth    # None or a pth file
+  model_save_prefix: mix_kp3 #./save/SuperRetina.pth
+  model_image_width: 1456
+  model_image_height: 1456
+  data_aug_type: 3 # 1:灰度图 2:绿色通道 3:其余的方法
+  big_resolution: True
+  image_original_size: 768 #和关键点的坐标系的尺寸相关
+  train_fire_dir: /home/yepeng_liu/code_base/unet_pretrain/displacement_train_retinal/train_datas/mix_generate/images_process/
+  anno_file_dir: /home/yepeng_liu/code_base/unet_pretrain/displacement_train_retinal/train_datas/mix_generate/fire-fundus-image-registration-dataset_fire_gt_super/
+  save_files_dir: ./save/
+  use_matching_trick: True
+  use_guide_map: False
+  use_score_map: False
+  nms_size: 10
+  nms_thresh: 0.01
+  knn_thresh: 0.9
+  keypoint_number: 30
+  train_epochs: 500
+  ir_epochs: [250, 400]
+  save_epochs: 100
+  batch_size: 4
+  loss: ncc # loss function ： l1.l2,ncc
+  window_size: 25 # default: 9
+  lr: 0.001 # ncc,0.0005
+  loss_with_smooth: True
+  loss_weights: [1,1.0,5,0.2] # mse,smooth,keypoints [1,1,0.1]
+  train_with_kp: True
+dataset:
+  dataset_name: "flori_points"   # "fire", "mixture", "fire_seg", "fire_seg_points", "fire_points", "flori_points"
+  read_sequence: "random" # "sequential" or "random"

@@ -1,0 +1,48 @@
+train:
+  device: cuda:2
+  pretrain_model: ./save/backbone_unet.pth    # None or a pth file
+  pretrain_model_big: ./save/unet_pretrain_big.pth    # None or a pth file
+  model_save_prefix: fire9 #./save/SuperRetina.pth
+  model_image_width: 1456
+  model_image_height: 1456
+  big_resolution: True
+  image_original_size: 2912 #和关键点的坐标系的尺寸相关
+  train_fire_dir: /home/yepeng_liu/code_python/keypoints_benchmark/unofficial-voxelmorph/VoxelMorph-PyTorch-master/train_datas/super_gt_generate_fire/gt_align_jpg/
+  anno_file_dir: /home/yepeng_liu/code_python/keypoints_benchmark/unofficial-voxelmorph/VoxelMorph-PyTorch-master/train_datas/super_gt_generate_fire/sp_align_points/
+  save_files_dir: ./save/
+  use_matching_trick: True
+  use_guide_map: False
+  use_score_map: False
+  nms_size: 10
+  nms_thresh: 0.01
+  knn_thresh: 0.9
+  keypoint_number: 60
+  train_epochs: 400
+  ir_epochs: [200, 300]
+  save_epochs: 50
+  batch_size: 4
+  loss: ncc # loss function ： l1.l2,ncc
+  window_size: 25 # default: 9
+  lr: 0.001 # ncc,0.0005
+  loss_with_smooth: True
+  loss_weights: [1.0,1.0,150,0.2] # mse,smooth,keypoints [1,1,0.1]
+  train_with_kp: True
+PREDICT:
+  device: cuda:2
+  model_save_path: ./best_weight/fire_edget55250.pth 
+  pretrain_model: None   # None or a pth file
+  model_image_width: 1456
+  model_image_height: 1456
+  test_method: 2 # 1代表测试两张图片，2代表测试fire文件夹内所有的匹配对，3代表将变换后的两幅图像融合在一起
+  test_fire_dir: test_datas/super_gt_generate_fire/gt_align_jpg/
+  test_ori_dir: test_datas/super_gt_generate_fire/sp_align_ori_img/
+  test_gt_dir: test_datas/super_gt_generate_fire/sp_align_points/
+  save_files_dir: ./visulize_files/
+  use_matching_trick: True
+  data_aug_type: 3 # 1:灰度图 2:绿色通道 3:其余的方法
+  nms_size: 10
+  nms_thresh: 0.01
+  knn_thresh: 0.9
+  is_gray: True
+  image_single_channel: False
+  image_original_size: 2912 #和关键点的坐标系的尺寸相关

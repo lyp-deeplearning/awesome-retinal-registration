@@ -1,0 +1,31 @@
+train:
+  device: cuda:2
+  pretrain_model: ./save/backbone_unet.pth    # None or a pth file
+  model_save_prefix: benchmark7 #./save/SuperRetina.pth
+  model_image_width: 768
+  model_image_height: 768
+  image_original_size: 2912 #和关键点的坐标系的尺寸相关
+  train_fire_dir: /home/yepeng_liu/code_base/unet_pretrain/displacement_train_retinal/train_datas/super_gt_generate_fire/gt_align_jpg/
+  anno_file_dir: /home/yepeng_liu/code_base/unet_pretrain/displacement_train_retinal/train_datas/super_gt_generate_fire/sp_align_points/
+  # train_fire_dir: /home/yepeng_liu/code_base/unet_pretrain/displacement_train_retinal/train_datas/mix_generate/wrap_file_super-retinal/
+  # anno_file_dir: /home/yepeng_liu/code_base/unet_pretrain/displacement_train_retinal/train_datas/mix_generate/fire-fundus-image-registration-dataset_fire_gt_super/
+  save_files_dir: ./save/
+  use_matching_trick: True
+  use_guide_map: False
+  use_score_map: False
+  nms_size: 10
+  nms_thresh: 0.01
+  knn_thresh: 0.9
+  keypoint_number: 60
+  train_epochs: 400
+  ir_epochs: [200, 300]
+  save_epochs: 30
+  batch_size: 5
+  loss: l2 # loss function ： l1.l2,ncc
+  lr: 0.005 # ncc,0.0005
+  loss_with_smooth: True
+  loss_weights: [1,1,0.1,0.2] # mse,smooth,keypoints [1,1,0.1]
+  train_with_kp: True
+dataset:
+  dataset_name: "fire_points"   # "fire", "mixture", "fire_seg", "fire_seg_points", "fire_points"
+  read_sequence: "random" # "sequential" or "random"
