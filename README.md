@@ -24,12 +24,12 @@ For more details, please refer to our [report on Arxiv](https://arxiv.org/abs/21
 <!-- <img src="https://github.com/lyp-deeplearning/MOS-Multi-Task-Face-Detect/blob/main/figures/face_demo.gif" height="320"/> -->
 
 #### Light Models.
-WiderFace Val Performance is in multi scale and Pose evaluation is using AFLW2000 in 300X300 as image input.
 
-|Model  |MAUC-S | MAUC-P |MAUC-A| MAUC | RMSE |
-| ------        |:---:  |  :---:       |:---:     |:---:  | :---: |:---: 
-|SuperRetina           |94.7 | 54.0 |78.3 | 75.7 |5.2 |
-|SuperRetina + GAMorph |94.0 | 65.9 |80.6 | 80.2 |4.5 |
+
+| Model               | MAUC-S | MAUC-P | MAUC-A | MAUC | RMSE |
+|---------------------|:------:|:------:|:------:|:----:|:----:|
+| SuperRetina         |  94.7  |  54.0  |  78.3  | 75.7 |  5.2 |
+| SuperRetina + GAMorph|  94.0  |  65.9  |  80.6  | 80.2 |  4.5 |
 
 ## Quick Start
 
